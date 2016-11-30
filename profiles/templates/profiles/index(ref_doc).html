@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Profiles App: Sign Up</title>
+        <script type = "text/javascript"  src = "/home/chirag/Desktop/jquery-validation-1.15.0/lib/jquery.js"></script>
+        <script type = "text/javascript" src="/home/chirag/Desktop/jquery-validation-1.15.0/dist/jquery.validate.js"></script>	
+        <script type = "text/javascript">
+	//only for demo purposes
+	$(document).ready(function(){
+	   $("#form1").validate({
+		<!--errorLabelContainer: $("#form1 div.error")-->
+		rules: {
+                    username: {
+                        required: true,
+                        minlength: 3,
+                        usercheck: true
+                    },
+                    firstname: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        pwcheck: true
+                    },
+                    retype: {
+                        equalTo: "#password"
+                    },
+                    email: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    username: {
+                        required: "Enter username",
+                        minlength: "Enter atleast 3 characters",
+                        usercheck: "Enter alphanumeric and underscore only",
+                    },
+                    firstname: {
+                        required: "Enter firstname"
+                    },
+                    password: {
+                        required: "Enter password",
+                        pwcheck: "Must contain one capital letter, one small letter, one digit and length between 4-8 characters"
+                    },
+                    retype: {
+                        equalTo: "Enter same password again"
+                    },
+                    email: {
+                        required: "Enter email"
+                    },
+                },
+                errorPlacement: function ($error, $element) {
+                    var name = $element.attr("name");                 
+                    $("#error" + name).append($error);
+                }
+	   }); 
+	   
+	$.validator.addMethod("usercheck",
+            function(value, element) {
+            return /^[A-Za-z0-9_]+$/.test(value);
+            });
+        
+        $.validator.addMethod("pwcheck",
+            function(value, element) {
+            return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,12}$/.test(value);
+            });
+	});  
+        </script>
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="../../static/css/animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="../../static/css/style.css">
+</head>
+
+<body>
+	<form method="post" id="form1" action="{% url 'signup' %}" class="container">
+		<div class="login-box animated fadeInUp" style="top:0px">  <!-- Inline styling is used over deafult -->
+			<div class="box-header">
+				<h2>Log In</h2>
+			</div>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" name="username" id="username" title="Please enter your username (at least 3 characters)">
+			<div id="errorusername" class="error">
+			</div>
+			<label for="first_name">First Name</label>
+			<br/>
+			<input type="text" id="firstname" name="firstname" title="This field is required">
+			<div id="errorfirstname" class="error">
+			</div>
+			<label for="last_name">Last Name</label>
+			<br/>
+			<input type="text" id="lastname" name="lastname">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password" name="password" title="Please enter your password, between 4 and 8 characters">
+			<br/>
+		        <div id="errorpassword" class="error">
+			</div>
+			<label for="retype">Retype Password</label>
+			<br/>
+			<input type="password" id="retype" name="retype">
+			<br/>
+			<div id="errorretype" class="error">
+			</div>
+			<label for="email">Email</label>
+			<br/>
+			<input type="email" id="email" name="email" title="Enter your email address">
+			<br/>
+			<div id="erroremail" class="error">
+			</div>
+			<button type="submit">Sign In</button>
+			<br/>
+			<p class="small">Already Registered?<a href="#">Log in</p></a>
+		</div>
+	</form>
+</body>
+</html>

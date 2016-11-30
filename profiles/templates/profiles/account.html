@@ -1,0 +1,68 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+        <title>Sign Up | Account Details</title>
+        <!--<script type = "text/javascript" src="{% static 'js/signup_checks.js' %}"></script> -->
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+        <form method="post" id="form1" action="{% url 'profiles:signup' %}" class="container">
+	{% csrf_token %}
+	   <div class="login-box animated " style="top:20px">
+	       <div class="box-header">
+		  <h2>Sign Up</h2><p class="smalldetail">Account Details</p>
+	       </div>
+	       {{ wizard.management_form }}
+	       {{ form.username.label_tag }}<br/>{{ form.username }}
+               <div id="error{{ form.username.name }}" class="error">
+               {% if form.username.errors %}{{ form.username.errors }}{% endif %}
+               </div> 
+               
+               <div id="error{{ form.username.name }}" class="error"></div> 
+               {{ form.first_name.label_tag }}<br/>{{ form.first_name }}
+               <div id="error{{ form.first_name.name }}" class="error">
+               {% if form.first_name.errors %}{{ form.first_name.errors}}{% endif %}
+               </div>
+               
+               {{ form.last_name.label_tag }}<br/>{{ form.last_name }}
+               <div id="error{{ form.last_name.name }}" class="error">
+               {% if form.last_name.errors %}{{ form.last_name.errors}}{% endif %}
+               </div>
+                              	    
+               {{ form.password.label_tag }}<br/>{{ form.password }}
+               <div id="error{{ form.password.name }}" class="error">
+               {% if form.password.errors %}{{ form.password.errors}}{% endif %}
+               </div>
+               
+               {{ form.verify_password.label_tag }}<br/>{{ form.verify_password }}
+               <div id="error{{ form.retype.name }}" class="error">
+               {% if form.verify_password.errors %}{{ form.verify_password.errors}}{% endif %}
+               </div>
+               
+               {{ form.email.label_tag }}<br/>{{ form.email }}
+               <div id="error{{ form.email.name }}" class="error">
+               {% if form.email.errors %}{{ form.email.errors}}{% endif %}
+               </div> 
+               
+               <a href="{{ cancel_url }}">{% trans "Cancel" %}</a>
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "Back" %}</button>
+                {% else %}
+                    <button name="" type="button" disabled>{% trans "Back" %}</button>
+                {% endif %}
+                {% if wizard.steps.next %}
+                    <button type="submit">{% trans "Next" %}</button>
+                {% else %}
+                    <button type="submit">{% trans 'submit' %}</button>
+               {% endif %}
+               <p>Already registered? <a href="{% url 'profiles:two_factor:login' %}">Click Here</a> to login.</p>
+	   </div>
+        </form>
+{% endblock %}

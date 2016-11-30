@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type = "text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+        <script type = "text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="{% static 'css/profile/profile.css' %}">
+        <script type = "text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+        <header>
+            <h1>Equitrax Corporate Ventures | {{ user.username}} </h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'profiles:home' %}">Home</a></li>
+                <li><a href="{% url 'profiles:account_details' pk=user.pk %}">Account Details</a></li>
+                <li><a href="{% url 'profiles:personal_details' pk=user.pk %}">Personal Details</a></li>
+                <li><a href="{% url 'profiles:job_details' pk=user.pk %}">Job Details</a></li> 
+                <li><a href="{% url 'profiles:two_factor:setup' %}">TFA Activation</a></li>
+                <li><a href="{% url 'profiles:two_factor:disable' %}">TFA Deactivation</a></li>
+                <li><a href="{% url 'profiles:logout' %}">Logout</a></li>
+            </ul>
+        </nav>       
+        <article>    
+        {% block body %}{% endblock %}
+        </article>
+        <footer style="text-align:center">Copyright &copy Equitrax Corporate Ventures</footer>        
+        </div>
+    </body>
+</html>
+

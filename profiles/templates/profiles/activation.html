@@ -1,0 +1,25 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %}
+
+
+{% block head %}
+        <title>Profiles App | Activation</title>
+        <script type = "text/javascript" src="{% static 'js/login_checks.js' %}"></script>
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+        <form method="post" id="form1" action="" class="container">
+	{% csrf_token %}
+	   <div class="login-box animated fadeInUp" style="top:220px">
+	       <div class="box-header">
+		  <h2>Log In</h2>
+	       </div>
+               <p>Your account has been activated. <u><a href="{% url 'profiles:two_factor:login' %}">Click Here</a></u> to login.</p>
+	   </div>
+        </form>
+{% endblock %}

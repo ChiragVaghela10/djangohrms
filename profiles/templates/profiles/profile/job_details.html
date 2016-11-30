@@ -1,0 +1,17 @@
+{% extends 'profiles/profile_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>
+        Profiles | Job Details
+    </title>
+{% endblock %}
+
+{% block body %}
+        <h1>Job Details</h1>
+        
+        <!-- We'are giving edit access here. Place 'if' here to place condition-->
+        <a class="btn btn-default" href=""><span class="glyphicon glyphicon-pencil"></span></a>
+        <!-- Edit functionality ends    -->
+        <p>Job Details</p>
+{% endblock %}

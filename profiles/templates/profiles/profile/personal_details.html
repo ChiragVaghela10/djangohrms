@@ -1,0 +1,24 @@
+{% extends 'profiles/profile_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>
+        Profiles | Personal Details
+    </title>
+{% endblock %}
+
+{% block body %}
+        <h1>Personal Details</h1>
+        
+        <!-- We'are giving edit access here. Place 'if' here to place condition-->
+        <a class="btn btn-default" href="{% url 'profiles:personal_details_edit' pk=userprofile.user.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <!-- Edit functionality ends    -->
+        <p>Country Code: {{ userprofile.phone_code }}</p>
+        <p>Phone Number: {{ userprofile.phone_number }}</p>
+        <p>Date of Birth: {{ userprofile.dob }}</p>
+        <p>Street1: {{ userprofile.street1 }}</p>
+        <p>Street2: {{ userprofile.street2 }}</p> 
+        <p>City: {{ userprofile.city }}</p>
+        <p>State: {{ userprofile.state }}</p>
+        <p>Pin Code: {{ userprofile.pincode }}</p>
+{% endblock %}

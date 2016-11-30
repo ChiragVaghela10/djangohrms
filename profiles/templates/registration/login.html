@@ -1,0 +1,54 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %} 
+{% load i18n %}
+{%
+this is comment
+%}
+
+{% block head %}
+    <title>Profiles App | Login Page</title>
+    <script type = "text/javascript" src="{% static 'js/login_checks.js' %}"></script> 
+  <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}        
+	<form method="post" id="form1" action="" class="container">
+	{% csrf_token %}{{ wizard.management_form }}
+	   <div class="login-box animated" style="top:150px">
+	       <div class="box-header">
+		  <h2>Log In</h2>
+	       </div>
+               	    <!--{{ form.username.label_tag }}<br/>{{ form.username }}
+               	    <div id="error{{ form.username.name }}" class="error"></div>
+               	    
+               	    {{ form.password.label_tag }}<br/>{{ form.password }}
+                    <div id="error{{ form.password.name }}" class="error"></div>
+               	    {% if form.errors %}
+               	    <div class="error" style="margin:20px">
+                        <p>Your username and password doesn't match.</p> 
+                    </div>
+                    {% endif %} -->  
+                {% include "two_factor/_wizard_forms.html" %}
+
+                {# hidden submit button to enable [enter] key #}
+                <div style="margin-left: -9999px"><input type="submit" value=""/></div>
+                <a href="{{ cancel_url }}">{% trans "Cancel" %}</a>
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "Back" %}</button>
+                {% else %}
+                    <button name="" type="button" disabled>{% trans "Back" %}</button>
+                {% endif %}
+                {% if wizard.steps.next %}
+                    <button type="submit">{% trans "Next" %}</button>
+                {% else %}
+                    <button type="submit">{% trans 'Login' %}</button>
+                {% endif %}
+                <p>Not registered? <a href="{% url 'profiles:signup' %}">Create an account</a></p>
+            </div>
+	</form>
+{% endblock %}

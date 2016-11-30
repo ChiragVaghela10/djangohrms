@@ -1,0 +1,63 @@
+{% extends 'profiles/profile_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>
+        Profiles | Personal Details
+    </title>
+    <script type="text/javascript" href="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        $( function() {
+            $( "#id_dob" ).datepicker();
+        } );
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Personal Details</h1>
+    <form method="POST" href="{% url 'profiles:personal_details_edit' pk=user.pk %}" class="post-form">
+    {% csrf_token %}
+        {{ form.phone_code.label_tag }}<br/>{{ form.phone_code }}
+        <div id="error{{ form.phone_code.name }}" class="error">
+        {% if form.phone_code.errors %}{{ form.phone_code.errors }}{% endif %}
+        </div>
+        <br/>
+        {{ form.phone_number.label_tag }}<br/>{{ form.phone_number }}
+        <div id="error{{ form.phone_number.name }}" class="error">
+        {% if form.phone_number.errors %}{{ form.phone_number.errors }}{% endif %}
+        </div>
+        <br/>
+        {{ form.dob.label_tag }}<br/>{{ form.dob }}
+        <div id="error{{ form.dob.name }}" class="error">
+        {% if form.dob.errors %}{{ form.dob.errors }}{% endif %}
+        </div>
+        <br/>
+        {{ form.street1.label_tag }}<br/>{{ form.street1 }}
+        <div id="error{{ form.street1.name }}" class="error">
+        {% if form.street1.errors %}{{ form.street1.errors}}{% endif %}
+        </div>
+        <br/>
+        {{ form.street2.label_tag }}<br/>{{ form.street2 }}
+        <div id="error{{ form.street2.name }}" class="error">
+        {% if form.street2.errors %}{{ form.street2.errors }}{% endif %}
+        </div>
+        <br/>
+        {{ form.city.label_tag }}<br/>{{ form.city }}
+        <div id="error{{ form.city.name }}" class="error">
+        {% if form.city.errors %}{{ form.city.errors}}{% endif %}
+        </div>
+        <br/>
+        {{ form.state.label_tag }}<br/>{{ form.state }}
+        <div id="error{{ form.state.name }}" class="error">
+        {% if form.state.errors %}{{ form.state.errors}}{% endif %}
+        </div>
+        <br/>
+        {{ form.pincode.label_tag }}<br/>{{ form.pincode }}
+        <div id="error{{ form.pincode.name }}" class="error">
+        {% if form.pincode.errors %}{{ form.pincode.errors}}{% endif %}
+        </div>
+        <br/>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

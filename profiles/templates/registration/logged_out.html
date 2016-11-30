@@ -1,0 +1,23 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <title>Profiles App | Logout</title>
+    <script type = "text/javascript" src="{% static 'js/login_checks.js' %}"></script>
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+    <form method="post" id="form1" action="" class="container">
+	{% csrf_token %}
+	<div class="login-box animated" style="top:220px"> <!-- fadeInUp-->
+	    <div class="box-header">
+	       <h2>Log Out</h2>
+	    </div>
+            <p>You've logged out. We're already missing you! <u><a href="{%url 'profiles:two_factor:login' %}">Click Here</a></u> if you change your mind and login again.</p>	    
+	</div>
+    </form>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+        <title>Sign Up | Account Details</title>
+        <!--<script type = "text/javascript" src="{% static 'js/signup_checks.js' %}"></script> -->
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script>
+        $( function() {
+            $( "#id_profile-dob" ).datepicker();
+        } );
+        </script>
+{% endblock %}
+
+{% block body %}
+        <form method="post" id="form1" action="{% url 'profiles:signup' %}" class="container">
+	{% csrf_token %}
+	   <div class="login-box animated " style="top:20px">
+	       <div class="box-header">
+		  <h2>Sign Up</h2><p class="smalldetail">Personal Details</p>
+	       </div>
+	       {{ wizard.management_form }}
+	       
+               <label for="id_profile-dob">Date of Birth:</label><br/>
+               <input id="id_profile-dob" name="profile-dob" type="date" value="{{ form.dob|date:'Y-m-d' }}" required />
+               <input id="initial-profile-id_profile-dob" name="initial-profile-dob" type="hidden" value="2016-11-29" />
+               <div id="error{{ form.dob.name }}" class="error">
+               {% if form.dob.errors %}{{ form.dob.errors }}{% endif %}
+               </div> 
+               
+               {{ form.phone_code.label_tag }}<br/>{{ form.phone_code }}
+               <div id="error{{ form.phone_code.name }}" class="error">
+               {% if form.phone_code.errors %}{{ form.phone_code.errors}}{% endif %}
+               </div>
+               
+               {{ form.phone_number.label_tag }}<br/>{{ form.phone_number }}
+               <div id="error{{ form.phone_number.name }}" class="error">
+               {% if form.phone_number.errors %}{{ form.phone_number.errors}}{% endif %}
+               </div>
+                              	    
+               {{ form.street1.label_tag }}<br/>{{ form.street1 }}
+               <div id="error{{ form.street1.name }}" class="error">
+               {% if form.street1.errors %}{{ form.street1.errors}}{% endif %}
+               </div>
+               
+               {{ form.street2.label_tag }}<br/>{{ form.street2 }}
+               <div id="error{{ form.street2.name }}" class="error">
+               {% if form.street2.errors %}{{ form.street2.errors}}{% endif %}
+               </div>
+               
+               {{ form.city.label_tag }}<br/>{{ form.city }}
+               <div id="error{{ form.city.name }}" class="error">
+               {% if form.city.errors %}{{ form.city.errors}}{% endif %}
+               </div> 
+               
+               {{ form.state.label_tag }}<br/>{{ form.state }}
+               <div id="error{{ form.state.name }}" class="error">
+               {% if form.state.errors %}{{ form.state.errors}}{% endif %}
+               </div>
+               
+               {{ form.pincode.label_tag }}<br/>{{ form.pincode }}
+               <div id="error{{ form.pincode.name }}" class="error">
+               {% if form.pincode.errors %}{{ form.pincode.errors}}{% endif %}
+               </div>
+               
+               <a href="{{ cancel_url }}">{% trans "Cancel" %}</a>
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "Back" %}</button>
+                {% else %}
+                    <button name="" type="button" disabled>{% trans "Back" %}</button>
+                {% endif %}
+                {% if wizard.steps.next %}
+                    <button type="submit">{% trans "Next" %}</button>
+                {% else %}
+                    <button type="submit">{% trans 'submit' %}</button>
+               {% endif %}
+               <p>Already registered? <a href="{% url 'profiles:two_factor:login' %}">Click Here</a> to login.</p>
+	   </div>
+        </form>
+{% endblock %}

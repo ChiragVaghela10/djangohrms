@@ -1,0 +1,38 @@
+{% extends 'profiles/profile_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>
+        Profiles | Account Details
+    </title>
+    <script type = "text/javascript" src="{% static 'js/account_checks.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Account Details</h1>
+    <form method="POST" href="{% url 'profiles:account_details_edit' pk=user.pk %}" class="post-form" id="form1">
+    {% csrf_token %}
+        {{ form.pk }}
+        {{ form.username.label_tag }}<br/>{{ form.username }}
+        <div id="error{{ form.username.name }}" class="error">
+        {% if form.username.errors %}{{ form.username.errors }}{% endif %}
+        </div>
+        <br/>
+        {{ form.first_name.label_tag }}<br/>{{ form.first_name }}
+        <div id="error{{ form.first_name.name }}" class="error">
+        {% if form.first_name.errors %}{{ form.first_name.errors}}{% endif %}
+        </div>
+        <br/>
+        {{ form.last_name.label_tag }}<br/>{{ form.last_name }}
+        <div id="error{{ form.last_name.name }}" class="error">
+        {% if form.last_name.errors %}{{ form.last_name.errors}}{% endif %}
+        </div>
+        <br/>
+        {{ form.email.label_tag }}<br/>{{ form.email }}
+        <div id="error{{ form.email.name }}" class="error">
+        {% if form.email.errors %}{{ form.email.errors}}{% endif %}
+        </div>
+        <br/>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

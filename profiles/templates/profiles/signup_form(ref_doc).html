@@ -1,0 +1,35 @@
+{% extends 'profiles/base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head %}
+    <title>Signup Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block body %}
+        <form method="post" action=""class="container">
+	{% csrf_token %}
+            <div class="login-box animated " style="top:30px">
+	       <div class="box-header">
+		  <h2>Sign Up</h2>
+	       </div>
+            {{ wizard.management_form }}
+            {{ wizard.form.as_p }}
+            
+            <a href="{{ cancel_url }}" >{% trans "Cancel" %}</a>
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "Back" %}</button>
+            {% else %}
+                <button disabled name="" type="button">{% trans "Back" %}</button>
+            {% endif %}
+            {% if wizard.steps.next %}
+                <button type="submit">{% trans "Next" %}</button>
+            {% else %}
+                <button type="submit">{% trans 'submit' %}</button>
+            {% endif %}
+            </div>
+        </form>
+{% endblock %}

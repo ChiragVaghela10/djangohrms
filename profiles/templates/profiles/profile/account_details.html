@@ -1,0 +1,19 @@
+{% extends 'profiles/profile_base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>
+        Profiles | Account Details
+    </title>
+{% endblock %}
+
+{% block body %}
+        <h1>Account Details</h1>        
+        <!-- We'are giving edit access here. Place 'if' here to place condition-->
+        <a class="btn btn-default" href="{% url 'profiles:account_details_edit' pk=useraccount.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <!-- Edit functionality ends    -->
+        <p>Username: {{ useraccount.username }}</p>
+        <p>First Name:  {{ useraccount.first_name }}</p>
+        <p>Last Name: {{ useraccount.last_name }}</p> 
+        <p>Registered Email: {{ useraccount.email }}</p>
+{% endblock %}
